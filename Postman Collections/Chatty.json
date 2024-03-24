@@ -4830,7 +4830,7 @@
 										"auth": {
 											"type": "bearer",
 											"bearer": {
-												"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjY2QxMDg3Yy01ZDQ5LTRlNTctOWJhZS1"
+												"token": "{{refresh_token}}"
 											}
 										},
 										"method": "POST",
@@ -5068,7 +5068,7 @@
 								"auth": {
 									"type": "bearer",
 									"bearer": {
-										"token": "{{refresh_token}}"
+										"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjY2QxMDg3Yy01ZDQ5LTRlNT"
 									}
 								},
 								"method": "GET",
