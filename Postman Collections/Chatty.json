@@ -636,6 +636,10 @@
 														"value": "*/*"
 													}
 												],
+												"body": {
+													"mode": "formdata",
+													"formdata": []
+												},
 												"url": {
 													"raw": "{{baseUrl}}/api/users/:user_id/posts?skip=0&limit=10",
 													"host": [
