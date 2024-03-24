@@ -1,0 +1,5254 @@
+{
+	"info": {
+		"_postman_id": "040bcef8-d01a-4a5e-84ab-4866289c6adf",
+		"name": "CHATTY",
+		"description": "Chatty Project\n\nContact Support:\n Name: Chatty team\n Email: chatty.team@gmail.com",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "users",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Update user",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "193829cb-4ad3-4335-b243-9ef59b35e269",
+												"exec": [
+													"var requestBody = pm.request.body;\r",
+													"var surname = requestBody.raw.match(/\"surname\":\\s*\"(.*?)\"/)[1];;\r",
+													"pm.environment.set(\"UpdaterSername\", surname);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "d71b80c0-fea2-4380-9174-cb93e2edb864",
+												"exec": [
+													"pm.test(\"Check for the presence of all fields in the response\", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"\r",
+													"\r",
+													"    pm.expect(jsonData).to.have.all.keys('id', 'name', 'surname', 'phone', 'email', 'role', 'gender', 'birthDate', 'avatarUrl', 'backgroundUrl');\r",
+													"});\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"id": "acef03a5-bb74-4c30-8cda-3226f24eb84a",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{refresh_token}}"
+											}
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"avatarUrl\": \"{{user_imageUrl}}\",\n  \"name\": \"Alex\",\n  \"surname\": \"Rashevchenko\",\n  \"birthDate\": \"\",\n  \"phone\": \"+79717901351\",\n  \"gender\": \"MALE\",\n  \"backgroundUrl\": \"ahhaha\",\n  \"blocked\": \"false\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{user_id}}"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "ab9b3ce0-8f2e-4d55-8f3e-28bfe7eaa68e",
+											"name": "OK",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"avatarUrl\": \"<string>\",\n  \"name\": \"kpgIBj\",\n  \"surname\": \"JJJJ\",\n  \"birthDate\": \"<dateTime>\",\n  \"phone\": \"+79717901351\",\n  \"gender\": \"<string>\",\n  \"backgroundUrl\": \"<string>\",\n  \"blocked\": \"<boolean>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"surname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<string>\",\n  \"role\": \"ADMIN\",\n  \"gender\": \"MALE\",\n  \"birthDate\": \"<dateTime>\",\n  \"avatarUrl\": \"<string>\",\n  \"backgroundUrl\": \"<string>\"\n}"
+										},
+										{
+											"id": "ec0c19dc-e3fa-4fdf-905f-a8c8d7678763",
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"avatarUrl\": \"<string>\",\n  \"name\": \"kpgIBj\",\n  \"surname\": \"JJJJ\",\n  \"birthDate\": \"<dateTime>\",\n  \"phone\": \"+79717901351\",\n  \"gender\": \"<string>\",\n  \"backgroundUrl\": \"<string>\",\n  \"blocked\": \"<boolean>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										},
+										{
+											"id": "5db731f2-54e9-4512-8f80-a90bb407aa19",
+											"name": "Unauthorized",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"avatarUrl\": \"<string>\",\n  \"name\": \"kpgIBj\",\n  \"surname\": \"JJJJ\",\n  \"birthDate\": \"<dateTime>\",\n  \"phone\": \"+79717901351\",\n  \"gender\": \"<string>\",\n  \"backgroundUrl\": \"<string>\",\n  \"blocked\": \"<boolean>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Delete user as user",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "4dbf9efd-8ddf-413a-980c-2b6aff50bbe8",
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"id": "d125db6e-75d9-4f3d-8d7a-a055d9f28a62",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{refresh_token}}"
+											}
+										},
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{user_id}}",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "c321e2ac-4f2b-4d44-b134-9b31c13c6abb",
+											"name": "OK",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{}"
+										},
+										{
+											"id": "e875633c-f0a1-4856-8205-5c96aba68f78",
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										},
+										{
+											"id": "376bc540-f26d-4099-bbb9-d1a4f7f08b2e",
+											"name": "Unauthorized",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Update admin",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "bae24b3c-c528-45b4-9f42-b4211f9bf554",
+												"exec": [
+													"pm.test(\"Check for the presence of all fields in the response\", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"\r",
+													"\r",
+													"    pm.expect(jsonData).to.have.all.keys('id', 'name', 'surname', 'phone', 'email', 'role', 'gender', 'birthDate', 'avatarUrl', 'backgroundUrl');\r",
+													"});\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "2eccb0b7-b733-4230-a55d-d61cb11ec6b2",
+												"exec": [
+													"var requestBody = pm.request.body;\r",
+													"var surname = requestBody.raw.match(/\"surname\":\\s*\"(.*?)\"/)[1];;\r",
+													"pm.environment.set(\"UpdateSurnameAsAdmin\", surname);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"id": "a8851959-9817-4df3-a44e-cf2cd64d2035",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{refresh_Admin}}"
+											}
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"avatarUrl\": \"{{admin_imageUrl}}\",\r\n  \"name\": \"Alex\",\r\n  \"surname\": \"Jeker\",\r\n  \"birthDate\": \"\",\r\n  \"phone\": \"+79717901351\",\r\n  \"gender\": \"MALE\",\r\n  \"backgroundUrl\": \"ahhaha\",\r\n  \"blocked\": \"false\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{admin_id}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete user as Admin",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "1994ee95-70c4-4447-94fc-922b51294983",
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"id": "9d153f53-a1b1-4f94-8c33-33124c52c5d5",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{refresh_Admin}}"
+											}
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{user_id}}"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"id": "4a7a9c27-1614-40b9-9ffb-6c3b3ad800cc"
+						},
+						{
+							"name": "{user_id}",
+							"item": [
+								{
+									"name": "posts",
+									"item": [
+										{
+											"name": "Get posts by user",
+											"id": "2ffe3648-9763-46d5-91c5-4ddb38db9f2b",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{refresh_token}}"
+													}
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/users/:user_id/posts?skip=0&limit=10",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"users",
+														":user_id",
+														"posts"
+													],
+													"query": [
+														{
+															"key": "skip",
+															"value": "0"
+														},
+														{
+															"key": "limit",
+															"value": "10"
+														}
+													],
+													"variable": [
+														{
+															"key": "user_id",
+															"value": "{{user_post_id}}",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"id": "7ed72eef-eab3-4a66-a00b-7e5bf6ac18f0",
+													"name": "OK",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															},
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/users/:user_id/posts?skip=0&limit=10",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"users",
+																":user_id",
+																"posts"
+															],
+															"query": [
+																{
+																	"key": "skip",
+																	"value": "0"
+																},
+																{
+																	"key": "limit",
+																	"value": "10"
+																}
+															],
+															"variable": [
+																{
+																	"key": "user_id"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"responseTime": null,
+													"body": "[\n  {\n    \"id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"body\": \"<string>\",\n    \"imageUrl\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"draft\": \"<boolean>\",\n    \"user\": {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"surname\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<string>\",\n      \"role\": \"ADMIN\",\n      \"gender\": \"MALE\",\n      \"birthDate\": \"<dateTime>\",\n      \"avatarUrl\": \"<string>\",\n      \"backgroundUrl\": \"<string>\"\n    }\n  },\n  {\n    \"id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"body\": \"<string>\",\n    \"imageUrl\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"draft\": \"<boolean>\",\n    \"user\": {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"surname\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<string>\",\n      \"role\": \"USER\",\n      \"gender\": \"MALE\",\n      \"birthDate\": \"<dateTime>\",\n      \"avatarUrl\": \"<string>\",\n      \"backgroundUrl\": \"<string>\"\n    }\n  }\n]"
+												},
+												{
+													"id": "04def847-cb1e-4cbd-b555-2977ebafb8a2",
+													"name": "Bad Request",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															},
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/users/:user_id/posts?skip=0&limit=10",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"users",
+																":user_id",
+																"posts"
+															],
+															"query": [
+																{
+																	"key": "skip",
+																	"value": "0"
+																},
+																{
+																	"key": "limit",
+																	"value": "10"
+																}
+															],
+															"variable": [
+																{
+																	"key": "user_id"
+																}
+															]
+														}
+													},
+													"status": "Bad Request",
+													"code": 400,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"responseTime": null,
+													"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+												},
+												{
+													"id": "824c7021-4aef-4eed-b2f4-5f51bc0598d5",
+													"name": "Unauthorized",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															},
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/users/:user_id/posts?skip=0&limit=10",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"users",
+																":user_id",
+																"posts"
+															],
+															"query": [
+																{
+																	"key": "skip",
+																	"value": "0"
+																},
+																{
+																	"key": "limit",
+																	"value": "10"
+																}
+															],
+															"variable": [
+																{
+																	"key": "user_id"
+																}
+															]
+														}
+													},
+													"status": "Unauthorized",
+													"code": 401,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"responseTime": null,
+													"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+												}
+											]
+										}
+									],
+									"id": "8317a5df-a215-408d-a96e-f77afc163abc"
+								}
+							],
+							"id": "fef68486-bf08-4a29-ac99-c95f45132580"
+						},
+						{
+							"name": "Get all users",
+							"id": "935b53f7-b808-4421-a89c-b6a2904f95ea",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{refresh_Admin}}"
+									}
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/users?skip=0&limit=10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "{{user_email}}",
+											"disabled": true
+										},
+										{
+											"key": "skip",
+											"value": "0"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "497fecc1-7a3e-4b27-a858-201f125ccb3e",
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/users?email=<string>&skip=0&limit=10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users"
+											],
+											"query": [
+												{
+													"key": "email",
+													"value": "<string>"
+												},
+												{
+													"key": "skip",
+													"value": "0"
+												},
+												{
+													"key": "limit",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n  {\n    \"id\": \"<string>\",\n    \"email\": \"<string>\",\n    \"name\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"role\": \"USER\",\n    \"gender\": \"MALE\",\n    \"birthDate\": \"<dateTime>\",\n    \"avatarUrl\": \"<string>\",\n    \"backgroundUrl\": \"<string>\",\n    \"blocked\": \"<boolean>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"email\": \"<string>\",\n    \"name\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"role\": \"ADMIN\",\n    \"gender\": \"MALE\",\n    \"birthDate\": \"<dateTime>\",\n    \"avatarUrl\": \"<string>\",\n    \"backgroundUrl\": \"<string>\",\n    \"blocked\": \"<boolean>\"\n  }\n]"
+								},
+								{
+									"id": "fd8bdf21-f773-4a2d-9dd9-8580d63ef7bb",
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/users?email=<string>&skip=0&limit=10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users"
+											],
+											"query": [
+												{
+													"key": "email",
+													"value": "<string>"
+												},
+												{
+													"key": "skip",
+													"value": "0"
+												},
+												{
+													"key": "limit",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+								},
+								{
+									"id": "cbc14718-5d71-4550-b167-c9d9d0590094",
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/users?email=<string>&skip=0&limit=10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users"
+											],
+											"query": [
+												{
+													"key": "email",
+													"value": "<string>"
+												},
+												{
+													"key": "skip",
+													"value": "0"
+												},
+												{
+													"key": "limit",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+								}
+							]
+						}
+					],
+					"id": "feb42ee7-6c88-4a35-8136-ee650ac10b7a"
+				},
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "password",
+							"item": [
+								{
+									"name": "update",
+									"item": [
+										{
+											"name": "Update password",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "63d392ec-c003-4990-a765-8f605553ef29",
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"id": "883ea8b3-25d0-4c19-a954-b75ee0673246",
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"id": "9fc93ed6-1f01-4026-bd88-003d450d7173",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{refresh_token}}"
+													}
+												},
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"currentPassword\": \"{{user_password}}\",\n  \"newPassword\": \"Gazmanov1234\",\n  \"confirmPassword\": \"Gazmanov1234\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{baseUrl}}/api/user/password/update"
+											},
+											"response": [
+												{
+													"id": "6129df6e-bc0d-4d78-8eb9-6513d01efe36",
+													"name": "OK",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "*/*"
+															},
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"confirmPassword\": \"<string>\",\n  \"currentPassword\": \"<string>\",\n  \"newPassword\": \"XXXXXXXX\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": "{{baseUrl}}/api/user/password/update"
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"responseTime": null,
+													"body": "{}"
+												},
+												{
+													"id": "b5c69119-6315-4200-9182-900f64bbfdf8",
+													"name": "Bad Request",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "*/*"
+															},
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"confirmPassword\": \"<string>\",\n  \"currentPassword\": \"<string>\",\n  \"newPassword\": \"XXXXXXXX\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": "{{baseUrl}}/api/user/password/update"
+													},
+													"status": "Bad Request",
+													"code": 400,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"responseTime": null,
+													"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+												},
+												{
+													"id": "07e8d91a-a3b1-400d-bf93-4b494e31f66e",
+													"name": "Unauthorized",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "*/*"
+															},
+															{
+																"description": "Added as a part of security scheme: bearer",
+																"key": "Authorization",
+																"value": "Bearer <token>"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"confirmPassword\": \"<string>\",\n  \"currentPassword\": \"<string>\",\n  \"newPassword\": \"XXXXXXXX\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": "{{baseUrl}}/api/user/password/update"
+													},
+													"status": "Unauthorized",
+													"code": 401,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"responseTime": null,
+													"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+												}
+											]
+										}
+									],
+									"id": "ed578d72-fa79-4a69-94c0-30d0bf7e847d"
+								}
+							],
+							"id": "2b67bd7d-9ad7-4b7b-bfa3-5ab6ebfedfc8"
+						}
+					],
+					"id": "7969d963-a02c-43da-b0e9-cb1dbc9b886d"
+				},
+				{
+					"name": "posts",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Get post by id as User",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "e3412779-d535-4646-980a-b0fb4f003529",
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"\r",
+													"pm.test(\"Response contains required fields\", function () {\r",
+													"    pm.expect(pm.response.json()).to.have.all.keys('id', 'title', 'description', 'body', 'imageUrl', 'createdAt', 'updatedAt', 'draft', 'user');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check user object fields\", function () {\r",
+													"    pm.expect(pm.response.json().user).to.have.all.keys('id', 'name', 'surname', 'phone', 'email', 'role', 'gender', 'birthDate', 'avatarUrl', 'backgroundUrl');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Status code is 404 if post is not found\", function () {\r",
+													"    if (pm.response.code === 404) {\r",
+													"        pm.expect(pm.response.json()).to.eql({ \"httpStatus\": \"NOT_FOUND\", \"message\": \"Post not found!\" });\r",
+													"    } else {\r",
+													"        pm.expect(pm.response.code).to.eql(404);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"\r",
+													"\r",
+													"\r",
+													"var titleFromEnvironment = pm.environment.get(\"title\");\r",
+													"\r",
+													"var responseData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Title from the request matches the title from the response\", function () {\r",
+													"    pm.expect(responseData.title).to.eql(titleFromEnvironment);\r",
+													"});\r",
+													"\r",
+													"\r",
+													"\r",
+													"\r",
+													"\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"id": "c3c53745-66e2-4989-a671-927ff0dd149e",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{refresh_token}}"
+											}
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/posts/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"posts",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{user_post_id}}",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "a2e61844-e5e7-49a4-9122-4ad36f8e5781",
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"body\": \"<string>\",\n  \"imageUrl\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"draft\": \"<boolean>\",\n  \"user\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"role\": \"ADMIN\",\n    \"gender\": \"MALE\",\n    \"birthDate\": \"<dateTime>\",\n    \"avatarUrl\": \"<string>\",\n    \"backgroundUrl\": \"<string>\"\n  }\n}"
+										},
+										{
+											"id": "c14ccfae-afe2-4bf0-b289-8d0f5c980f1d",
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										},
+										{
+											"id": "c1cd8f90-af9e-4570-8a69-9a5e6d9181c9",
+											"name": "Unauthorized",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Get post by id as Admin",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "e3412779-d535-4646-980a-b0fb4f003529",
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"\r",
+													"pm.test(\"Response contains required fields\", function () {\r",
+													"    pm.expect(pm.response.json()).to.have.all.keys('id', 'title', 'description', 'body', 'imageUrl', 'createdAt', 'updatedAt', 'draft', 'user');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Check user object fields\", function () {\r",
+													"    pm.expect(pm.response.json().user).to.have.all.keys('id', 'name', 'surname', 'phone', 'email', 'role', 'gender', 'birthDate', 'avatarUrl', 'backgroundUrl');\r",
+													"});\r",
+													"pm.test(\"Status code is 404 if post is not found\", function () {\r",
+													"    if (pm.response.code === 404) {\r",
+													"        pm.expect(pm.response.json()).to.eql({ \"httpStatus\": \"NOT_FOUND\", \"message\": \"Post not found!\" });\r",
+													"    } else {\r",
+													"        pm.expect(pm.response.code).to.be.oneOf([200, 404]);\r",
+													"    }\r",
+													"});\r",
+													"\r",
+													"var titleFromEnvironment = pm.environment.get(\"titleAsAdmin\");\r",
+													"\r",
+													"var responseData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Title from the request matches the title from the response\", function () {\r",
+													"    pm.expect(responseData.title).to.eql(titleFromEnvironment);\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"id": "f7ce8ace-d0da-4fc7-9c30-8d733433df7b",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{refresh_Admin}}"
+											}
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/posts/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"posts",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{admin_post_Id}}",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "48fa9902-a93b-4c0a-a07f-69622e941be1",
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"body\": \"<string>\",\n  \"imageUrl\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"draft\": \"<boolean>\",\n  \"user\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"role\": \"ADMIN\",\n    \"gender\": \"MALE\",\n    \"birthDate\": \"<dateTime>\",\n    \"avatarUrl\": \"<string>\",\n    \"backgroundUrl\": \"<string>\"\n  }\n}"
+										},
+										{
+											"id": "719daccf-6a68-440a-a2bc-b0df1d905f48",
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										},
+										{
+											"id": "cf2d7a81-bbf2-4174-9019-e9c5fe3d3862",
+											"name": "Unauthorized",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Update post as User",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "b343633c-c58b-4383-bfa7-a69378a75b11",
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "90e19ea4-d63b-4699-9e0d-9d3f985b49a0",
+												"exec": [
+													"var requestBody = pm.request.body;\r",
+													"var title = requestBody.raw.match(/\"title\":\\s*\"(.*?)\"/)[1];;\r",
+													"pm.environment.set(\"title\", title);\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"id": "b082b788-9d98-43cc-8ee4-1a2dd3dc3a3e",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{refresh_token}}"
+											}
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"body\": \"This is my other Post\",\n  \"description\": \"Doggi\",\n  \"title\": \"ddsaw\",\n  \"imageUrl\": \"{{user_imageUrl}}\",\n  \"draft\": \"false\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/posts/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"posts",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{user_post_id}}",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "3ab68c1b-eb11-4f22-8654-d63141afff32",
+											"name": "OK",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"body\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"imageUrl\": \"<string>\",\n  \"draft\": \"<boolean>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"body\": \"<string>\",\n  \"imageUrl\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"draft\": \"<boolean>\",\n  \"user\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"role\": \"ADMIN\",\n    \"gender\": \"MALE\",\n    \"birthDate\": \"<dateTime>\",\n    \"avatarUrl\": \"<string>\",\n    \"backgroundUrl\": \"<string>\"\n  }\n}"
+										},
+										{
+											"id": "e87f7bb4-b912-4359-953a-87bd91e3dcfe",
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"body\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"imageUrl\": \"<string>\",\n  \"draft\": \"<boolean>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										},
+										{
+											"id": "d2ad8095-360c-4e28-ad43-c3a4c9a93c6f",
+											"name": "Unauthorized",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"body\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"imageUrl\": \"<string>\",\n  \"draft\": \"<boolean>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Update post as Admin",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "dfaf77c8-67c4-49c4-9458-2a79e83aa1aa",
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response contains all required fields\", function () {\r",
+													"    var responseData = pm.response.json();\r",
+													"    var expectedFields = ['id', 'title', 'description', 'body', 'imageUrl', 'createdAt', 'updatedAt', 'draft', 'user'];\r",
+													"    \r",
+													"    expectedFields.forEach(function(field) {\r",
+													"        pm.expect(responseData).to.have.property(field);\r",
+													"    });\r",
+													"    \r",
+													"    var userFields = ['id', 'name', 'surname', 'phone', 'email', 'role', 'gender', 'birthDate', 'avatarUrl', 'backgroundUrl'];\r",
+													"    pm.expect(responseData.user).to.have.keys(userFields);\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"id": "39adc010-04f3-4509-8431-13be319b05d1",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{refresh_Admin}}"
+											}
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"body\": \"This is my other Post\",\n  \"description\": \"Dogg admin\",\n  \"title\": \"ddsa\",\n  \"imageUrl\": \"{{admin_imageUrl}}\",\n  \"draft\": \"false\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/posts/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"posts",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{admin_post_Id}}",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "6edf9c06-7367-414e-8563-76fd5f9cafe1",
+											"name": "OK",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"body\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"imageUrl\": \"<string>\",\n  \"draft\": \"<boolean>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"body\": \"<string>\",\n  \"imageUrl\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"draft\": \"<boolean>\",\n  \"user\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"role\": \"ADMIN\",\n    \"gender\": \"MALE\",\n    \"birthDate\": \"<dateTime>\",\n    \"avatarUrl\": \"<string>\",\n    \"backgroundUrl\": \"<string>\"\n  }\n}"
+										},
+										{
+											"id": "1b1f0550-e3f8-4cde-971f-242e35389ba8",
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"body\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"imageUrl\": \"<string>\",\n  \"draft\": \"<boolean>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										},
+										{
+											"id": "ec4b1c24-21e5-47fb-b111-2297a420af76",
+											"name": "Unauthorized",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"body\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"imageUrl\": \"<string>\",\n  \"draft\": \"<boolean>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Delete post as user",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "a32685f2-60e0-4128-8b0d-e5af94283990",
+												"exec": [
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "47a9c2b5-981b-44eb-ac9d-4160a2c4b981",
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {\r",
+													"    pm.response.to.have.status(204);\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"id": "44536616-1d05-4c7f-84ba-8eb363c50514",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{refresh_token}}"
+											}
+										},
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/posts/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"posts",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{user_post_id}}",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "a2ea9a9b-649d-4dc0-8c89-ac75a481cbd7",
+											"name": "OK",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"responseTime": null,
+											"body": ""
+										},
+										{
+											"id": "12fd24d6-e398-426d-8a97-26ae38c8987a",
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										},
+										{
+											"id": "3bae6f2c-13a4-4d06-8973-897afbc8593c",
+											"name": "Unauthorized",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Delete post as admin",
+									"id": "1121d2c4-691b-44c3-a843-e31bd1dbaba2",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{refresh_Admin}}"
+											}
+										},
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/posts/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"posts",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{admin_post_Id}}",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "90e3e2ec-ddb2-417f-b450-39598466d5ee",
+											"name": "OK",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"responseTime": null,
+											"body": ""
+										},
+										{
+											"id": "2324de7e-0c0b-4d19-b943-2854dfd460a3",
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										},
+										{
+											"id": "54262c38-ad0e-4f19-aa37-f1f7ba92492b",
+											"name": "Unauthorized",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/posts/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"posts",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										}
+									]
+								}
+							],
+							"id": "6a9f0626-234c-49e8-9a9b-81b2dccda9e2"
+						},
+						{
+							"name": "drafts",
+							"item": [
+								{
+									"name": "Get draft posts as User",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "571bb372-0f5a-424f-961f-4a85bd24ce11",
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"pm.test(\"Response time is less than 100ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(100);\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"id": "bb7c7555-dd59-42a1-bcb2-e7234d930d09",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{refresh_token}}"
+											}
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": "{{baseUrl}}/api/posts/drafts"
+									},
+									"response": [
+										{
+											"id": "ce67f1ab-d091-4898-8d88-569761c8aa2f",
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": "{{baseUrl}}/api/posts/drafts"
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "[\n  {\n    \"id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"body\": \"<string>\",\n    \"imageUrl\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"draft\": \"<boolean>\",\n    \"user\": {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"surname\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<string>\",\n      \"role\": \"ADMIN\",\n      \"gender\": \"MALE\",\n      \"birthDate\": \"<dateTime>\",\n      \"avatarUrl\": \"<string>\",\n      \"backgroundUrl\": \"<string>\"\n    }\n  },\n  {\n    \"id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"body\": \"<string>\",\n    \"imageUrl\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"draft\": \"<boolean>\",\n    \"user\": {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"surname\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<string>\",\n      \"role\": \"USER\",\n      \"gender\": \"MALE\",\n      \"birthDate\": \"<dateTime>\",\n      \"avatarUrl\": \"<string>\",\n      \"backgroundUrl\": \"<string>\"\n    }\n  }\n]"
+										},
+										{
+											"id": "0b4e1830-3f0f-460e-b440-ce0fa368626a",
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": "{{baseUrl}}/api/posts/drafts"
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										},
+										{
+											"id": "957a14b0-3dd7-4998-bc5c-cb40a46e0a2a",
+											"name": "Unauthorized",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": "{{baseUrl}}/api/posts/drafts"
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Get draft posts as admin",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "76aa03b7-b581-42a1-96ca-bcaa683fb9dd",
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"pm.test(\"Response time is less than 100ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(100);\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"id": "e519c440-2186-47a8-a126-4a95effa1007",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{refresh_Admin}}"
+											}
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": "{{baseUrl}}/api/posts/drafts"
+									},
+									"response": [
+										{
+											"id": "780eaeeb-2f11-4716-abef-a26697257436",
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": "{{baseUrl}}/api/posts/drafts"
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "[\n  {\n    \"id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"body\": \"<string>\",\n    \"imageUrl\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"draft\": \"<boolean>\",\n    \"user\": {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"surname\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<string>\",\n      \"role\": \"ADMIN\",\n      \"gender\": \"MALE\",\n      \"birthDate\": \"<dateTime>\",\n      \"avatarUrl\": \"<string>\",\n      \"backgroundUrl\": \"<string>\"\n    }\n  },\n  {\n    \"id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"body\": \"<string>\",\n    \"imageUrl\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"draft\": \"<boolean>\",\n    \"user\": {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"surname\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<string>\",\n      \"role\": \"USER\",\n      \"gender\": \"MALE\",\n      \"birthDate\": \"<dateTime>\",\n      \"avatarUrl\": \"<string>\",\n      \"backgroundUrl\": \"<string>\"\n    }\n  }\n]"
+										},
+										{
+											"id": "4413f756-9cea-49f0-8eff-7cb01e2810c0",
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": "{{baseUrl}}/api/posts/drafts"
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										},
+										{
+											"id": "afdafe8b-d164-4a10-a0cc-7ba631d7ea02",
+											"name": "Unauthorized",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"url": "{{baseUrl}}/api/posts/drafts"
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										}
+									]
+								}
+							],
+							"id": "9031de64-ffdb-401a-a41e-72e448c59bb9"
+						},
+						{
+							"name": "Get all posts as User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "6ca34214-5165-4838-8004-8168c191c4f3",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 100ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(100);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "2aaf505d-9efa-4ab0-bb3d-04b40f898476",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{refresh_token}}"
+									}
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/posts?skip=0&limit=10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"posts"
+									],
+									"query": [
+										{
+											"key": "skip",
+											"value": "0"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "40ffa817-53f7-42ff-898d-7dbf09bed4a1",
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/posts?skip=0&limit=10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"posts"
+											],
+											"query": [
+												{
+													"key": "skip",
+													"value": "0"
+												},
+												{
+													"key": "limit",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n  {\n    \"id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"body\": \"<string>\",\n    \"imageUrl\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"draft\": \"<boolean>\",\n    \"user\": {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"surname\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<string>\",\n      \"role\": \"ADMIN\",\n      \"gender\": \"MALE\",\n      \"birthDate\": \"<dateTime>\",\n      \"avatarUrl\": \"<string>\",\n      \"backgroundUrl\": \"<string>\"\n    }\n  },\n  {\n    \"id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"body\": \"<string>\",\n    \"imageUrl\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"draft\": \"<boolean>\",\n    \"user\": {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"surname\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<string>\",\n      \"role\": \"USER\",\n      \"gender\": \"MALE\",\n      \"birthDate\": \"<dateTime>\",\n      \"avatarUrl\": \"<string>\",\n      \"backgroundUrl\": \"<string>\"\n    }\n  }\n]"
+								},
+								{
+									"id": "e153029c-2ec0-4e92-bdf6-f7fbc888b7ca",
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/posts?skip=0&limit=10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"posts"
+											],
+											"query": [
+												{
+													"key": "skip",
+													"value": "0"
+												},
+												{
+													"key": "limit",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+								},
+								{
+									"id": "165e9351-4a3e-45da-91ac-eed741211876",
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/posts?skip=0&limit=10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"posts"
+											],
+											"query": [
+												{
+													"key": "skip",
+													"value": "0"
+												},
+												{
+													"key": "limit",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Get all posts as Admin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "6ca34214-5165-4838-8004-8168c191c4f3",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Response time is less than 100ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(100);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "35ad7175-3c68-4352-b919-101656ec4c93",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{refresh_Admin}}"
+									}
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/posts?skip=0&limit=10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"posts"
+									],
+									"query": [
+										{
+											"key": "skip",
+											"value": "0"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "1d0a3411-a333-43ee-9a8e-f99b7497fa6b",
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/posts?skip=0&limit=10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"posts"
+											],
+											"query": [
+												{
+													"key": "skip",
+													"value": "0"
+												},
+												{
+													"key": "limit",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n  {\n    \"id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"body\": \"<string>\",\n    \"imageUrl\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"draft\": \"<boolean>\",\n    \"user\": {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"surname\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<string>\",\n      \"role\": \"ADMIN\",\n      \"gender\": \"MALE\",\n      \"birthDate\": \"<dateTime>\",\n      \"avatarUrl\": \"<string>\",\n      \"backgroundUrl\": \"<string>\"\n    }\n  },\n  {\n    \"id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"body\": \"<string>\",\n    \"imageUrl\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"draft\": \"<boolean>\",\n    \"user\": {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"surname\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"email\": \"<string>\",\n      \"role\": \"USER\",\n      \"gender\": \"MALE\",\n      \"birthDate\": \"<dateTime>\",\n      \"avatarUrl\": \"<string>\",\n      \"backgroundUrl\": \"<string>\"\n    }\n  }\n]"
+								},
+								{
+									"id": "e16f36bb-cad0-4346-8932-665b802d9d6c",
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/posts?skip=0&limit=10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"posts"
+											],
+											"query": [
+												{
+													"key": "skip",
+													"value": "0"
+												},
+												{
+													"key": "limit",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+								},
+								{
+									"id": "40ecfabe-9d1b-4644-9a97-7ea19cdaaabf",
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/posts?skip=0&limit=10",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"posts"
+											],
+											"query": [
+												{
+													"key": "skip",
+													"value": "0"
+												},
+												{
+													"key": "limit",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Create post as User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "36ebd311-90e3-4111-af97-22bf105c37a3",
+										"exec": [
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response contains required fields\", function () {\r",
+											"    pm.expect(pm.response.json()).to.have.all.keys('id', 'title', 'description', 'body', 'imageUrl', 'publishDate', 'updatedAt', 'draft', 'userId');\r",
+											"});\r",
+											"\r",
+											"\r",
+											"var userId = pm.variables.get('user_id');\r",
+											"pm.test(\"Check value of 'userId' field\", function () {\r",
+											"    pm.expect(pm.response.json().userId).to.eql(userId);\r",
+											"});\r",
+											"\r",
+											"if (pm.response.code === 201) {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.environment.set(\"user_post_id\", jsonData.id);\r",
+											"};\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "71af7bff-0f58-4771-9586-9d225eeacdd5",
+										"exec": [
+											"var requestBody = pm.request.body;\r",
+											"var title = requestBody.raw.match(/\"title\":\\s*\"(.*?)\"/)[1];;\r",
+											"pm.environment.set(\"title\", title);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "7d0cb44a-a09b-4f8c-aeb3-bc444908eff7",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{refresh_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"body\": \"Hello this is my new Post\",\n  \"description\": \"My Dogg\",\n  \"title\": \"My new Post as User\",\n  \"imageUrl\": \"{{user_imageUrl}}\",\n  \"publishDate\": \"\",\n  \"draft\": \"false\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/posts"
+							},
+							"response": [
+								{
+									"id": "220b3286-fba9-4d34-baca-402dba44c33c",
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"body\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"imageUrl\": \"<string>\",\n  \"publishDate\": \"<dateTime>\",\n  \"draft\": \"<boolean>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/posts"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"body\": \"<string>\",\n  \"imageUrl\": \"<string>\",\n  \"publishDate\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"draft\": \"<boolean>\",\n  \"userId\": \"<string>\"\n}"
+								},
+								{
+									"id": "518b663d-83e1-4007-bcf9-805d1ac0c8d0",
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"body\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"imageUrl\": \"<string>\",\n  \"publishDate\": \"<dateTime>\",\n  \"draft\": \"<boolean>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/posts"
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+								},
+								{
+									"id": "6760b1d6-f4fa-4bad-b128-fec10b5edfc2",
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"body\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"imageUrl\": \"<string>\",\n  \"publishDate\": \"<dateTime>\",\n  \"draft\": \"<boolean>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/posts"
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Create post as Admin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "36ebd311-90e3-4111-af97-22bf105c37a3",
+										"exec": [
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response contains required fields\", function () {\r",
+											"    pm.expect(pm.response.json()).to.have.all.keys('id', 'title', 'description', 'body', 'imageUrl', 'publishDate', 'updatedAt', 'draft', 'userId');\r",
+											"});\r",
+											"\r",
+											"\r",
+											"var adminId = pm.variables.get('admin_id');\r",
+											"pm.test(\"Check value of 'adminId' field\", function () {\r",
+											"    pm.expect(pm.response.json().userId).to.eql(adminId);\r",
+											"});\r",
+											"\r",
+											"if (pm.response.code === 201) {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.environment.set(\"admin_post_Id\", jsonData.id);\r",
+											"};\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "b2f1c59a-f66f-4dba-8d1e-c5984beb2122",
+										"exec": [
+											"var requestBody = pm.request.body;\r",
+											"var title = requestBody.raw.match(/\"title\":\\s*\"(.*?)\"/)[1];;\r",
+											"pm.environment.set(\"titleAsAdmin\", title);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "9a52c411-ccfd-4f40-b8a0-faa816053d90",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{refresh_Admin}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"body\": \"Hello this is my new Post as admin\",\n  \"description\": \"My Dogg\",\n  \"title\": \"My new Post as Admin>\",\n  \"imageUrl\": \"{{admin_imageUrl}}\",\n  \"publishDate\": \"\",\n  \"draft\": \"true\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/posts"
+							},
+							"response": [
+								{
+									"id": "c92456d0-18b5-43a9-b3d7-5e86d1aa58c8",
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"body\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"imageUrl\": \"<string>\",\n  \"publishDate\": \"<dateTime>\",\n  \"draft\": \"<boolean>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/posts"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"body\": \"<string>\",\n  \"imageUrl\": \"<string>\",\n  \"publishDate\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"draft\": \"<boolean>\",\n  \"userId\": \"<string>\"\n}"
+								},
+								{
+									"id": "e506d764-60ae-49eb-9543-7f4625514cc3",
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"body\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"imageUrl\": \"<string>\",\n  \"publishDate\": \"<dateTime>\",\n  \"draft\": \"<boolean>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/posts"
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+								},
+								{
+									"id": "98b2b535-ddbe-476d-91dc-e6f5f72e46c4",
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"body\": \"<string>\",\n  \"description\": \"<string>\",\n  \"title\": \"<string>\",\n  \"imageUrl\": \"<string>\",\n  \"publishDate\": \"<dateTime>\",\n  \"draft\": \"<boolean>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/posts"
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+								}
+							]
+						}
+					],
+					"id": "14b8e012-ffab-4349-a8a4-f97f28c085a8"
+				},
+				{
+					"name": "images",
+					"item": [
+						{
+							"name": "Upload image file as User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "5f7d7932-b9c4-4418-b715-2d5315bfede8",
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"if (pm.response.code === 201) {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.environment.set(\"user_imageUrl\", jsonData.imageUrl);\r",
+											"};"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "e1daf377-7732-4529-8e3d-f716828cab0c",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{refresh_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"description": "(Required) ",
+											"key": "multipartFile",
+											"type": "file",
+											"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+											"filesNotInWorkingDirectory": [
+												"/C:/Users/Oleksandr/OneDrive/Рабочий стол/447238255 (1).jpg"
+											],
+											"src": "postman-cloud:///1eee7950-3c54-4f70-a4ab-6118bf24775d"
+										}
+									]
+								},
+								"url": "{{baseUrl}}/api/images"
+							},
+							"response": [
+								{
+									"id": "55ee8266-db4d-4687-acf0-49e81074121b",
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"description": "(Required) ",
+													"key": "multipartFile",
+													"value": "<string>",
+													"type": "text"
+												}
+											]
+										},
+										"url": "{{baseUrl}}/api/images"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"imageUrl\": \"<string>\"\n}"
+								},
+								{
+									"id": "1f1be4de-d134-4f03-a52e-10d97f587914",
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"description": "(Required) ",
+													"key": "multipartFile",
+													"value": "<string>",
+													"type": "text"
+												}
+											]
+										},
+										"url": "{{baseUrl}}/api/images"
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+								},
+								{
+									"id": "9d21071c-be6d-42cb-8fd7-08c14c3759ca",
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"description": "(Required) ",
+													"key": "multipartFile",
+													"value": "<string>",
+													"type": "text"
+												}
+											]
+										},
+										"url": "{{baseUrl}}/api/images"
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Upload image file as Admin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a6ac4845-75f0-45d9-9d8c-1a42103eb6ee",
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"if (pm.response.code === 201) {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.environment.set(\"admin_imageUrl\", jsonData.imageUrl);\r",
+											"};"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "50d8a7f1-3315-498a-8570-e3ec5680d1fe",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{refresh_Admin}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "multipartFile",
+											"type": "file",
+											"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+											"filesNotInWorkingDirectory": [
+												"/C:/Users/Oleksandr/OneDrive/Рабочий стол/th.jpg"
+											],
+											"src": "postman-cloud:///1eee7971-111e-4f10-aa3a-c20f580dc52d"
+										}
+									]
+								},
+								"url": "{{baseUrl}}/api/images"
+							},
+							"response": []
+						}
+					],
+					"id": "4d77720e-fdd5-4ff7-955d-956df1ae5ef3"
+				},
+				{
+					"name": "feedback",
+					"item": [
+						{
+							"name": "Send Feedback",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "716f7598-10ad-4ef1-985f-786695c70ff3",
+										"exec": [
+											"pm.test(\"Check presence of all required fields\", function () {\r",
+											"    pm.response.to.have.jsonBody('name');\r",
+											"    pm.response.to.have.jsonBody('email');\r",
+											"    pm.response.to.have.jsonBody('content');\r",
+											"});\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "713a1f33-f8f2-4e88-a110-2393f6fe2fbd",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{refresh_token}}"
+									}
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Alex\",\n  \"email\": \"{{user_email}}\",\n  \"content\": \"Hello i am Alex\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/feedback"
+							},
+							"response": [
+								{
+									"id": "408e4d8e-2562-47a6-900f-d64a8ba08f14",
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"content\": \"<string>\",\n  \"email\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/feedback"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"content\": \"<string>\",\n  \"email\": \"<string>\",\n  \"name\": \"<string>\"\n}"
+								},
+								{
+									"id": "a908ba76-dea9-4470-8d4f-262ff0e978c4",
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"content\": \"<string>\",\n  \"email\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/feedback"
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+								},
+								{
+									"id": "6ac3de21-02f4-4a8e-9d22-25e7678ed3be",
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"content\": \"<string>\",\n  \"email\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/feedback"
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Send Feedback as Admin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b1e06caf-91be-4262-a94d-f2385ea86170",
+										"exec": [
+											"pm.test(\"Check presence of all required fields\", function () {\r",
+											"    pm.response.to.have.jsonBody('name');\r",
+											"    pm.response.to.have.jsonBody('email');\r",
+											"    pm.response.to.have.jsonBody('content');\r",
+											"});\r",
+											"pm.test(\"Response time is less than 100ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(100);\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "17c6f1cd-94cf-48fe-a3aa-6c4d5379961f",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{refresh_Admin}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Alex\",\r\n  \"email\": \"{{admin_email}}\",\r\n  \"content\": \"Hello i am Alex, i am Admin hier\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/feedback"
+							},
+							"response": []
+						}
+					],
+					"id": "eb74bdd5-cbdc-4842-86f5-bc73eea11f3b"
+				},
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "register",
+							"item": [
+								{
+									"name": "Registration user",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "31b2b06a-2816-4952-98f9-3630508baa44",
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(201);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response should contain access token\", function () {\r",
+													"    pm.response.to.have.jsonBody('accessToken');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response should contain refresh token\", function () {\r",
+													"    pm.response.to.have.jsonBody('refreshToken');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response should contain expiration\", function () {\r",
+													"    pm.response.to.have.jsonBody('expiration');\r",
+													"});\r",
+													"if (pm.response.code === 201) {\r",
+													"    var jsonData = pm.response.json();\r",
+													"    pm.environment.set(\"jwt_token\", jsonData.accessToken);\r",
+													"};"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f6556d8b-6cfd-4f59-b88a-3f8d0b40ae05",
+												"exec": [
+													"var requestBody = pm.request.body;\r",
+													"var email = requestBody.raw.match(/\"email\":\\s*\"(.*?)\"/)[1];\r",
+													"var password = requestBody.raw.match(/\"password\":\\s*\"(.*?)\"/)[1];\r",
+													"\r",
+													"\r",
+													"pm.environment.set(\"user_email\", email);\r",
+													"pm.environment.set(\"user_password\", password);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"id": "c6329a79-68ec-4cd2-9cf3-62c5a5b72cac",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6InRlc3RAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImV4cCI6MjEwNjk3ODI5Nn0.GM1wsoRV2QoAsD6wKmIk7N49DDpuCejK4BC9H9YItJvesH5vft8HO2uqTPnGQJwJ5oXKS2OILqP1yoanMnIMkA"
+											}
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"Sasha11311A@gmail.com\",\n  \"password\": \"Gazmanov1234567A\",\n  \"confirmPassword\": \"Gazmanov1234567A\",\n  \"role\": \"user\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/auth/register"
+									},
+									"response": [
+										{
+											"id": "63038236-1243-412a-bb3d-433be4604f4c",
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"confirmPassword\": \"<string>\",\n  \"email\": \"<string>\",\n  \"password\": \"wLQwLQwLQwLQ\",\n  \"role\": \"user\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{baseUrl}}/api/auth/register"
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"accessToken\": \"<string>\",\n  \"refreshToken\": \"<string>\",\n  \"expiration\": \"<long>\"\n}"
+										},
+										{
+											"id": "9d6a5a05-3340-4181-ab6e-367c11e7b15a",
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"confirmPassword\": \"<string>\",\n  \"email\": \"<string>\",\n  \"password\": \"wLQwLQwLQwLQ\",\n  \"role\": \"user\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{baseUrl}}/api/auth/register"
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										},
+										{
+											"id": "1301dbb7-5d43-4966-8530-6daf6d503bf4",
+											"name": "Unauthorized",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"confirmPassword\": \"<string>\",\n  \"email\": \"<string>\",\n  \"password\": \"wLQwLQwLQwLQ\",\n  \"role\": \"user\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{baseUrl}}/api/auth/register"
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Register Admin",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "a00c0944-4d39-48c6-974d-0164c450b7ac",
+												"exec": [
+													"var requestBody = pm.request.body;\r",
+													"var email = requestBody.raw.match(/\"email\":\\s*\"(.*?)\"/)[1];\r",
+													"var password = requestBody.raw.match(/\"password\":\\s*\"(.*?)\"/)[1];\r",
+													"\r",
+													"\r",
+													"pm.environment.set(\"admin_email\", email);\r",
+													"pm.environment.set(\"admin_password\", password);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "bda546ce-fe60-4719-8d97-59062dec1865",
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(201);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response should contain access token\", function () {\r",
+													"    pm.response.to.have.jsonBody('accessToken');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response should contain refresh token\", function () {\r",
+													"    pm.response.to.have.jsonBody('refreshToken');\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response should contain expiration\", function () {\r",
+													"    pm.response.to.have.jsonBody('expiration');\r",
+													"});\r",
+													"if (pm.response.code === 201) {\r",
+													"    var jsonData = pm.response.json();\r",
+													"    pm.environment.set(\"jwt_token_admin\", jsonData.accessToken);\r",
+													"};"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"id": "3fa48ab6-a50c-402d-a7c9-36dfdfbc83fd",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"email\": \"Alexxx144@gmail.com\",\r\n  \"password\": \"Gazmanov12345\",\r\n  \"confirmPassword\": \"Gazmanov12345\",\r\n  \"role\": \"admin\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/auth/register"
+									},
+									"response": []
+								}
+							],
+							"id": "4ff2f308-1378-48f9-b592-5b72ba11b8ad"
+						},
+						{
+							"name": "refresh",
+							"item": [
+								{
+									"name": "Refresh token",
+									"id": "4df07afb-686c-449b-8cfb-28c5078e5e48",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"refreshToken\": \"{{refresh_token}}\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/auth/refresh"
+									},
+									"response": [
+										{
+											"id": "cf304a55-33c1-4dc5-875e-e7b9b3f88b39",
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"refreshToken\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{baseUrl}}/api/auth/refresh"
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"accessToken\": \"<string>\",\n  \"refreshToken\": \"<string>\",\n  \"expiration\": \"<long>\"\n}"
+										},
+										{
+											"id": "899d5c99-66c4-49d7-a916-88b90ed6ed94",
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"refreshToken\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{baseUrl}}/api/auth/refresh"
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										},
+										{
+											"id": "5d5ea212-84c5-4df3-a37c-ca0df5257094",
+											"name": "Unauthorized",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"refreshToken\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{baseUrl}}/api/auth/refresh"
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										}
+									]
+								}
+							],
+							"id": "73e7dead-6bb4-430d-a58f-1983f97fc578"
+						},
+						{
+							"name": "login",
+							"item": [
+								{
+									"name": "Login admin",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "c0f60eb2-ae4b-4f8a-886e-36922082c00e",
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response body has accessToken and refreshToken\", function () {\r",
+													"    pm.response.to.have.jsonBody(\"accessToken\");\r",
+													"    pm.response.to.have.jsonBody(\"refreshToken\");\r",
+													"    pm.response.to.have.jsonBody(\"expiration\");\r",
+													"});\r",
+													"if (pm.response.code === 200) {\r",
+													"    var jsonData = pm.response.json();\r",
+													"    pm.environment.set(\"refresh_Admin\", jsonData.refreshToken);\r",
+													"};"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"id": "e791d4de-ba39-48e7-afe1-46675e8593b9",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"email\": \"{{admin_email}}\",\r\n  \"password\": \"{{admin_password}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/auth/login"
+									},
+									"response": []
+								},
+								{
+									"name": "Login user",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "03083815-abf9-4ce0-bfd6-e9e80b7a67cd",
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response body has accessToken and refreshToken\", function () {\r",
+													"    pm.response.to.have.jsonBody(\"accessToken\");\r",
+													"    pm.response.to.have.jsonBody(\"refreshToken\");\r",
+													"    pm.response.to.have.jsonBody(\"expiration\");\r",
+													"});\r",
+													"if (pm.response.code === 200) {\r",
+													"    var jsonData = pm.response.json();\r",
+													"    pm.environment.set(\"refresh_token\", jsonData.refreshToken);\r",
+													"};\r",
+													""
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"id": "702a4a70-a1dd-49df-bbfd-e24222d87cb0",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{bearerToken}}"
+											}
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"email\": \"{{user_email}}\",\n  \"password\": \"{{user_password}}\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/auth/login"
+									},
+									"response": [
+										{
+											"id": "560028d1-3abe-41b8-aa4f-34c333c6d370",
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"<string>\",\n  \"password\": \"`*`c%`*`c%\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{baseUrl}}/api/auth/login"
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"accessToken\": \"<string>\",\n  \"refreshToken\": \"<string>\",\n  \"expiration\": \"<long>\"\n}"
+										},
+										{
+											"id": "e6b2cc7c-b30e-4104-bee4-a5edc8a598e5",
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"<string>\",\n  \"password\": \"`*`c%`*`c%\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{baseUrl}}/api/auth/login"
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										},
+										{
+											"id": "7538298e-ea60-4de5-9339-2cc1e62ac24c",
+											"name": "Unauthorized",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													},
+													{
+														"description": "Added as a part of security scheme: bearer",
+														"key": "Authorization",
+														"value": "Bearer <token>"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"email\": \"<string>\",\n  \"password\": \"`*`c%`*`c%\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{baseUrl}}/api/auth/login"
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+										}
+									]
+								}
+							],
+							"id": "6531ba37-e792-4ede-98ea-e51380524189"
+						}
+					],
+					"id": "65aec70a-68cf-4a08-927e-e21c0a28be13"
+				},
+				{
+					"name": "me",
+					"item": [
+						{
+							"name": "Get user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "185a9f6f-9466-460e-aba6-2fdc3653ae74",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response body has required fields\", function () {\r",
+											"    pm.response.to.have.jsonBody(\"id\");\r",
+											"    pm.response.to.have.jsonBody(\"name\");\r",
+											"    pm.response.to.have.jsonBody(\"surname\");\r",
+											"    pm.response.to.have.jsonBody(\"phone\");\r",
+											"    pm.response.to.have.jsonBody(\"email\");\r",
+											"    pm.response.to.have.jsonBody(\"role\");\r",
+											"    pm.response.to.have.jsonBody(\"gender\");\r",
+											"    pm.response.to.have.jsonBody(\"birthDate\");\r",
+											"    pm.response.to.have.jsonBody(\"avatarUrl\");\r",
+											"    pm.response.to.have.jsonBody(\"backgroundUrl\");\r",
+											"});\r",
+											"if (pm.response.code === 200) {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.environment.set(\"user_id\", jsonData.id);\r",
+											"};\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											"var titleFromEnvironment = pm.environment.get(\"UpdaterSername\");\r",
+											"\r",
+											"var responseData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Title from the request matches the title from the response\", function () {\r",
+											"    pm.expect(responseData.surname).to.eql(titleFromEnvironment);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "d6f5d6ff-1f46-4e2f-8eb6-ee850f943383",
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "860ffe3a-6f78-4968-999f-3371af5f6776",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{refresh_token}}"
+									}
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": "{{baseUrl}}/api/me"
+							},
+							"response": [
+								{
+									"id": "473a50d9-af1a-44a5-8592-25df051ffd88",
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": "{{baseUrl}}/api/me"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"surname\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<string>\",\n  \"role\": \"ADMIN\",\n  \"gender\": \"MALE\",\n  \"birthDate\": \"<dateTime>\",\n  \"avatarUrl\": \"<string>\",\n  \"backgroundUrl\": \"<string>\"\n}"
+								},
+								{
+									"id": "b9fcc344-daa1-4d95-92b4-9fff8cb649b7",
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": "{{baseUrl}}/api/me"
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+								},
+								{
+									"id": "30f9bdb8-d070-4d82-88a4-d6989fd0dd47",
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											},
+											{
+												"description": "Added as a part of security scheme: bearer",
+												"key": "Authorization",
+												"value": "Bearer <token>"
+											}
+										],
+										"url": "{{baseUrl}}/api/me"
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"httpStatus\": \"308 PERMANENT_REDIRECT\",\n  \"message\": \"<string>\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Admin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "7599f299-5112-476a-9711-8c5e3d81f31a",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response body has required fields\", function () {\r",
+											"    pm.response.to.have.jsonBody(\"id\");\r",
+											"    pm.response.to.have.jsonBody(\"name\");\r",
+											"    pm.response.to.have.jsonBody(\"surname\");\r",
+											"    pm.response.to.have.jsonBody(\"phone\");\r",
+											"    pm.response.to.have.jsonBody(\"email\");\r",
+											"    pm.response.to.have.jsonBody(\"role\");\r",
+											"    pm.response.to.have.jsonBody(\"gender\");\r",
+											"    pm.response.to.have.jsonBody(\"birthDate\");\r",
+											"    pm.response.to.have.jsonBody(\"avatarUrl\");\r",
+											"    pm.response.to.have.jsonBody(\"backgroundUrl\");\r",
+											"});\r",
+											"if (pm.response.code === 200) {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.environment.set(\"admin_id\", jsonData.id);\r",
+											"};\r",
+											"\r",
+											"\r",
+											"\r",
+											"var titleFromEnvironment = pm.environment.get(\"UpdateSurnameAsAdmin\");\r",
+											"var responseData = pm.response.json();\r",
+											"\r",
+											"\r",
+											"if (responseData.surname !== null) {\r",
+											"    pm.test(\"Title from the request matches the title from the response\", function () {\r",
+											"        pm.expect(responseData.surname).to.eql(titleFromEnvironment);\r",
+											"    });\r",
+											"} else {\r",
+											"    \r",
+											"    console.log(\"Surname is null in the response. Test passed.\");\r",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"id": "20b9d0ca-e545-4b32-8705-02992af7d5d4",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{refresh_Admin}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "{{baseUrl}}/api/me"
+							},
+							"response": []
+						}
+					],
+					"id": "dd49ee69-19d6-41c0-a135-aa069db5e744"
+				}
+			],
+			"id": "bb532a30-ae62-41e7-b14b-4a756041f452"
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://chatty.telran-edu.de:8989"
+		}
+	]
+}
