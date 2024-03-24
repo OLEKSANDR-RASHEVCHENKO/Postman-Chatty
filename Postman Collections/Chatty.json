@@ -4830,7 +4830,7 @@
 										"auth": {
 											"type": "bearer",
 											"bearer": {
-												"token": "{{bearerToken}}"
+												"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjY2QxMDg3Yy01ZDQ5LTRlNTctOWJhZS1"
 											}
 										},
 										"method": "POST",
