@@ -5068,7 +5068,7 @@
 								"auth": {
 									"type": "bearer",
 									"bearer": {
-										"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjY2QxMDg3Yy01ZDQ5LTRlNT"
+										"token": "{{refresh_token}}"
 									}
 								},
 								"method": "GET",
