@@ -4379,7 +4379,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"email\": \"alex{{$randomInt}}@gmail.com\",\n  \"password\": \"Gazmanov1234567A\",\n  \"confirmPassword\": \"Gazmanov1234567A\",\n  \"role\": \"user\"\n}",
+											"raw": "{\n  \"email\": \"alexxxx@gmail.com\",\n  \"password\": \"Gazmanov1234567A\",\n  \"confirmPassword\": \"Gazmanov1234567A\",\n  \"role\": \"user\"\n}",
 											"options": {
 												"raw": {
 													"headerFamily": "json",
